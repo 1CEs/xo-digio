@@ -2,7 +2,7 @@
 
 :root {
   --primary: #55AAFF;
-  --secondary: #90c7ff;
+  --secondary: #6293c5;
   --background: #121212;
   --foreground: #eee;
 }
@@ -10,6 +10,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

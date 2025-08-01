@@ -6,12 +6,12 @@ type Props = {
     variant: "primary" | "secondary" | "default"
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-const PlayfulButton = ({ children, size = "md", variant = "primary", ...props }: Props) => {
+const PlayfulButton = ({ children, size = "md", variant = "primary", className = "", ...props }: Props) => {
 
     const variantClasses = {
-        primary: "bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        default: "bg-gray-500 text-gray-50 hover:bg-gray-600",
+        primary: "bg-primary text-foreground hover:bg-primary/80",
+        secondary: "bg-secondary text-foreground hover:bg-secondary/80",
+        default: "bg-gray-500 text-foreground hover:bg-gray-600",
     }[variant]
 
     const sizeClasses = {
@@ -24,7 +24,7 @@ const PlayfulButton = ({ children, size = "md", variant = "primary", ...props }:
     return (
         <button
             {...props}
-            className={`${props.className} ${sizeClasses} ${variantClasses} 
+            className={`${className} ${sizeClasses} ${variantClasses} 
                         flex items-center justify-center
                         cursor-pointer rounded-xl
                         transition-colors duration-200 ease-in-out
