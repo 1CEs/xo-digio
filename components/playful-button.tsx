@@ -1,37 +1,56 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 
 type Props = {
+    href?: string
     children: React.ReactNode
     size: "sm" | "md" | "lg" | "xl"
-    variant: "primary" | "secondary" | "default"
+    variant: "primary" | "secondary" | "disabled"
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-const PlayfulButton = ({ children, size = "md", variant = "primary", className = "", ...props }: Props) => {
-
-    const variantClasses = {
-        primary: "bg-primary text-foreground hover:bg-primary/80",
-        secondary: "bg-secondary text-foreground hover:bg-secondary/80",
-        default: "bg-gray-500 text-foreground hover:bg-gray-600",
-    }[variant]
-
+const PlayfulButton = ({ href, children, size = "md", variant = "primary", className = "", ...props }: Props) => {
+    const [isDown, setIsDown] = useState(false)
+    const getVariantClasses = () => {
+        return {
+            border: `bg-gradient-to-b from-${variant} to-${variant}/75 text-white shadow-blue-500/50`,
+            inner: `bg-gradient-to-r from-${variant} to-${variant} text-white shadow-blue-500/50`,
+            boxShadow: `inset 5px 5px 10px var(--background), inset -20px -20px 60px var(--${variant})`
+        }
+    }
+    const variantClasses = getVariantClasses()
     const sizeClasses = {
-        sm: "px-2 py-1 text-md font-medium",
-        md: "px-4 py-2 text-lg font-medium",
-        lg: "px-8 py-4 text-xl font-semibold",
-        xl: "px-14 py-6 text-2xl font-bold",
+        sm: "w-24 h-10 text-md font-medium",
+        md: "w-28 h-12 text-lg font-medium",
+        lg: "w-36 h-16 text-xl font-semibold",
+        xl: "w-48 h-20 text-2xl font-bold",
     }[size]
 
     return (
         <button
+            
             {...props}
-            className={`${className} ${sizeClasses} ${variantClasses} 
-                        flex items-center justify-center
-                        cursor-pointer rounded-xl
+            onMouseDown={() => setIsDown(true)}
+            onMouseUp={() => setIsDown(false)}
+            className={`${className} ${sizeClasses} ${variantClasses.border} 
+                        flex items-center justify-center p-1
+                        cursor-pointer rounded-full
                         transition-colors duration-200 ease-in-out
                         `}>
-            <span>
-                {children}
-            </span>
+            <div
+                style={isDown ? {
+                    boxShadow: variantClasses.boxShadow
+                } : undefined}
+                className={`rounded-full w-full h-full flex items-center 
+                        justify-center ${variantClasses.inner}
+                        border-black/50
+                        ${isDown ? "border-t-4 border-b-0" : "border-t-0 border-b-8"}
+                        `}>
+                <span className="z-10">
+                    {children}
+                </span>
+            </div>
+
+
         </button>
     )
 }
