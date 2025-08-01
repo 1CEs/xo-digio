@@ -3,6 +3,10 @@
 :root {
   --primary: #55AAFF;
   --secondary: #6293c5;
+  --success: #32d758;
+  --warning: #ffc107;
+  --danger: #e0505f;
+  --disabled: #6d6d6d;
   --background: #121212;
   --foreground: #eee;
 }
@@ -12,6 +16,10 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-disabled: var(--disabled);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
