@@ -5,15 +5,15 @@ type Props = {
     href?: string
     children: React.ReactNode
     size: "sm" | "md" | "lg" | "xl"
-    variant: "primary" | "secondary" | "disabled"
+    variant: "primary" | "secondary" | "disabled" | "success" | "warning" | "danger"
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const PlayfulButton = ({ href, children, size = "md", variant = "primary", className = "", ...props }: Props) => {
     const [isDown, setIsDown] = useState(false)
     const getVariantClasses = () => {
         return {
-            border: `bg-gradient-to-b from-${variant} to-${variant}/75 text-white shadow-blue-500/50`,
-            inner: `bg-gradient-to-r from-${variant} to-${variant} text-white shadow-blue-500/50`,
+            border: `bg-${variant} shadow-blue-500/50`,
+            inner: `bg-${variant} shadow-blue-500/50`,
             boxShadow: `inset 5px 5px 10px var(--background), inset -20px -20px 60px var(--${variant})`
         }
     }
