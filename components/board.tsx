@@ -6,9 +6,9 @@ type Props = {
     idle?: boolean
     rows?: number
     cols?: number
-}
+} & React.HTMLAttributes<HTMLDivElement>
 
-const Board = ({ size="md", idle=false, rows=3,cols=3 }: Props) => {
+const Board = ({ size="md", idle=false, rows=3,cols=3, ...props }: Props) => {
     const idlePattern = [
         <FaCircleO/>, <IcomoonFreeCross/>, "",
         "", <IcomoonFreeCross/>, <FaCircleO/>,
@@ -22,7 +22,7 @@ const Board = ({ size="md", idle=false, rows=3,cols=3 }: Props) => {
     }[size]
   return (
     <div 
-        className={`${sizeClasses} grid grid-cols-${cols} grid-rows-${rows} gap-2 ${idle ? "idle-board" : ""}`} 
+        className={`${props.className} ${sizeClasses} grid grid-cols-${cols} grid-rows-${rows} gap-2 ${idle ? "idle-board" : ""}`} {...props}
     >
         {Array.from({ length: rows * cols }, (_, index) => {
             const colors = [

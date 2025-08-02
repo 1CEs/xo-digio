@@ -6,7 +6,7 @@ type Props = {
     children: React.ReactNode
     startIcon?: React.ReactNode
     endIcon?: React.ReactNode
-    size: "sm" | "md" | "lg" | "xl"
+    size?: "sm" | "md" | "lg" | "xl"
     variant: "primary" | "secondary" | "disabled" | "success" | "warning" | "danger"
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
