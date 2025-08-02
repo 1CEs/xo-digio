@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signUpSchema } from "@/validation/form"
 import type { z } from "zod"
+import Form from "@/components/member/form"
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -53,13 +54,7 @@ function SignUpPage() {
   const hasSpecialChar = /[!@#$%^&*()_+]/.test(passwordValue)
 
   return (
-    <form
-      className="flex flex-col gap-4 items-center justify-center 
-                rounded-xl border-b-primary border-r-primary xl:w-1/6 lg:w-1/4 md:w-1/3"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <Image src={Logo} alt="Logo" width={150} height={150} />
-
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full">
         <PlayfulInput
           errMessage={errors.username?.message}
@@ -124,7 +119,7 @@ function SignUpPage() {
         </PlayfulButton>
         <Link href="/member/sign-in" className="text-xs underline">Already have an account?</Link>
       </div>
-    </form>
+    </Form>
   )
 }
 
