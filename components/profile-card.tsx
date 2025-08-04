@@ -39,7 +39,7 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
 
   if (isAuthenticated && user) {
     return (
-      <div className={`bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 ${className}`}>
+      <div className={`bg-white/10 backdrop-blur-sm rounded-xl w-full p-4 border border-white/20 ${className}`}>
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
             {user.avatar ? (
@@ -79,7 +79,7 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
   }
 
   return (
-    <div className={`bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 ${className}`}>
+    <div className={`bg-white/10 backdrop-blur-sm rounded-xl w-full p-4 border border-white/20 ${className}`}>
       <div className="flex items-center gap-3 mb-3">
         <div className="w-10 h-10 bg-warning/20 rounded-full flex items-center justify-center">
           <SolarUserBold className="text-warning text-lg" />

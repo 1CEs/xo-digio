@@ -51,3 +51,11 @@ export function SolarLogout2Bold(props: SVGProps<SVGSVGElement>) {
 export function SolarLogin2Bold(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1a1 1 0 1 1 2 0v1h8V4H8v1a1 1 0 1 1-2 0V4a2 2 0 0 1 2-2"></path><path fill="currentColor" d="M13 16a1 1 0 0 0 1-1v-2h6.586l-1.293 1.293a1 1 0 0 0 1.414 1.414l3-3a1 1 0 0 0 0-1.414l-3-3a1 1 0 0 0-1.414 1.414L20.586 11H14V9a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1"></path></svg>);
 }
+
+export function SolarRestart2Bold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M18.364 8.05a.75.75 0 0 1 1.03.25c.912 1.453 1.356 3.137 1.356 4.95c0 5.937-4.813 10.75-10.75 10.75S-.75 19.187-.75 13.25S4.063 2.5 10 2.5c2.125 0 4.078.618 5.74 1.677V3a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75H13a.75.75 0 0 1 0-1.5h1.825A8.226 8.226 0 0 0 10 4C5.168 4 1.25 7.918 1.25 12.75S5.168 21.5 10 21.5s8.75-3.918 8.75-8.75c0-1.442-.35-2.804-.97-4.004a.75.75 0 0 1 .334-1.046Z"></path></svg>);
+}
+
+export function SolarHomeBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M2.33537 7.87495c-.1581-.9484.04431-1.92319.57618-2.76093.53187-.83774 1.34005-1.46619 2.29823-1.78652L9.07729 2.028c1.31582-.4411 2.73158-.4411 4.04738 0l3.8685 1.30157c.9582.32033 1.7664.94878 2.2982 1.78652.5319.83774.7343 1.81253.5762 2.76093L19.5566 9.8212c-.3168 1.8974-.9533 3.7204-1.8856 5.3981l-4.2488 7.6417c-.5667 1.0193-1.8274 1.3687-2.8467.7893l-.7933-.4508c-.9398-.5342-1.5162-1.5557-1.5162-2.6867v-2.9616c0-.7682-.6318-1.4-1.4-1.4-.7682 0-1.4.6318-1.4 1.4v2.9616c0 1.131-.5764 2.1525-1.5162 2.6867l-.7933.4508c-1.0193.5794-2.28.2299-2.8467-.7893L2.8422 15.2193c-.9323-1.6777-1.5688-3.5007-1.8856-5.3981z"></path></svg>);
+}

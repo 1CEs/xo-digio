@@ -49,10 +49,10 @@ const PlayfulButton = ({ href, children, startIcon, endIcon, size = "md", varian
     }
     const variantClasses = getVariantClasses()
     const sizeClasses = {
-        sm: "w-24 h-10 text-md font-medium",
-        md: "w-28 h-12 text-lg font-medium",
-        lg: "w-36 h-16 text-xl font-semibold",
-        xl: "w-48 h-20 text-2xl font-bold",
+        sm: "h-10 text-md font-medium px-4",
+        md: "h-12 text-lg font-medium px-6",
+        lg: "h-16 text-xl font-semibold px-8",
+        xl: "h-20 text-2xl font-bold px-10",
     }[size]
 
     return (
@@ -62,7 +62,7 @@ const PlayfulButton = ({ href, children, startIcon, endIcon, size = "md", varian
             onMouseDown={() => setIsDown(true)}
             onMouseUp={() => setIsDown(false)}
             className={`${className} ${sizeClasses} ${variantClasses.border} 
-                        flex items-center justify-center p-1
+                        inline-flex items-center justify-center p-1
                         cursor-pointer rounded-full
                         transition-colors duration-200 ease-in-out
                         `}>
@@ -70,9 +70,8 @@ const PlayfulButton = ({ href, children, startIcon, endIcon, size = "md", varian
                 style={isDown ? {
                     boxShadow: variantClasses.boxShadow
                 } : undefined}
-                className={`rounded-full w-full h-full flex items-center 
-                         gap-2 ${variantClasses.inner} border-black/50 
-                        ${startIcon || endIcon ? "px-4" : "justify-center"}
+                className={`rounded-full w-full h-full inline-flex items-center px-4
+                         gap-2 ${variantClasses.inner} border-black/50 justify-center
                         ${isDown ? "border-t-4 border-b-0" : "border-t-0 border-b-8"}
                         `}>
                 {startIcon && <div className="flex items-center justify-center focus:outline-none">{startIcon}</div>}
