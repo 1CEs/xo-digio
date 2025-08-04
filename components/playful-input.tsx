@@ -13,7 +13,7 @@ const PlayfulInput = forwardRef<HTMLInputElement, Props>(({ errMessage, color = 
             <div className='bg-white rounded-full p-1 w-full flex items-center justify-center'>
                 <div className="flex items-center justify-center w-full gap-2 bg-white border-b-8 border-black/50 rounded-full px-2">
                     {startIcon && <div className="flex items-center justify-center w-8 h-8 focus:outline-none">{startIcon}</div>}
-                    <input {...props} ref={ref} className={`placeholder:text-sm p-2 w-full focus:outline-none`} />
+                    <input {...props} ref={ref} className={`placeholder:text-sm p-2 w-full focus:outline-none rounded-r-full`} />
                     {endIcon && <div className="flex items-center justify-center w-8 h-8 focus:outline-none">{endIcon}</div>}
                 </div>
 

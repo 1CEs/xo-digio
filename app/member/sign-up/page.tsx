@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signUpSchema } from "@/validation/form"
 import type { z } from "zod"
+import { toast } from 'react-toastify'
 import Form from "@/components/member/form"
 
 function SignUpPage() {
@@ -41,9 +42,42 @@ function SignUpPage() {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      console.log('Form submitted successfully:', data)
+      const response = await fetch('/api/auth/sign-up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      
+      const result = await response.json()
+      
+      if (response.ok) {
+        toast.success('Account created successfully! Welcome to XO-Digio!', {
+          position: "top-right",
+          autoClose: 5000,
+        })
+        console.log('Form submitted successfully:', result)
+      } else {
+        // Handle API errors
+        if (result.error) {
+          toast.error(result.error, {
+            position: "top-right",
+            autoClose: 5000,
+          })
+        } else {
+          toast.error('Failed to create account. Please try again.', {
+            position: "top-right",
+            autoClose: 5000,
+          })
+        }
+      }
     } catch (error) {
       console.error('Error submitting form:', error)
+      toast.error('Network error. Please check your connection and try again.', {
+        position: "top-right",
+        autoClose: 5000,
+      })
     }
   }
 
@@ -75,6 +109,7 @@ function SignUpPage() {
 
       <div className="w-full">
         <PlayfulInput
+          errMessage={errors.password?.message}
           placeholder="Password"
           type={showPassword ? "text" : "password"}
           startIcon={<SolarPasswordBold />}
@@ -84,6 +119,7 @@ function SignUpPage() {
 
       <div className="w-full">
         <PlayfulInput
+          errMessage={errors.confirmPassword?.message}
           placeholder="Confirm Password"
           type={showPassword ? "text" : "password"}
           startIcon={<SolarPasswordBold />}

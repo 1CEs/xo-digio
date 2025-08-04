@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Logo from '@/public/logo.svg'
 
 type Props = {
-    onSubmit: (data: any) => void
+    onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
     children: React.ReactNode
 }
 

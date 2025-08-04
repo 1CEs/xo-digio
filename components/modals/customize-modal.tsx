@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { customizationSchema } from '@/validation/setting'
 import PlayfulInput from '@/components/playful-input'
 import PlayfulButton from '@/components/playful-button'
 import { IcomoonFreeCross, IconParkSolidSettingTwo } from '@/components/icons'
+import { useSettingStore } from '@/stores/setting'
 import { z } from 'zod'
 
 type CustomizationFormData = z.infer<typeof customizationSchema>
@@ -19,6 +20,18 @@ type Props = {
 }
 
 const CustomizeModal = ({ isOpen, onClose, onSave, initialValues }: Props) => {
+    // Zustand store
+    const { 
+        boardRows, 
+        boardCols, 
+        aiDifficulty, 
+        setBoardRows, 
+        setBoardCols, 
+        setAiDifficulty,
+        updateSettings,
+        getSettings
+    } = useSettingStore()
+
     const {
         register,
         handleSubmit,
@@ -30,9 +43,9 @@ const CustomizeModal = ({ isOpen, onClose, onSave, initialValues }: Props) => {
     } = useForm<CustomizationFormData>({
         resolver: zodResolver(customizationSchema),
         defaultValues: {
-            boardRows: initialValues?.boardRows || 3,
-            boardCols: initialValues?.boardCols || 3,
-            aiDifficulty: initialValues?.aiDifficulty || 'medium'
+            boardRows: boardRows,
+            boardCols: boardCols,
+            aiDifficulty: aiDifficulty
         }
     })
 
@@ -40,25 +53,37 @@ const CustomizeModal = ({ isOpen, onClose, onSave, initialValues }: Props) => {
     const watchedCols = watch('boardCols')
     const watchedDifficulty = watch('aiDifficulty')
 
+    // Sync form with store when modal opens
+    useEffect(() => {
+        if (isOpen) {
+            const currentSettings = getSettings()
+            reset(currentSettings)
+        }
+    }, [isOpen, reset, getSettings])
+
     // Handlers for increment/decrement
     const handleRowsChange = (increment: boolean) => {
-        const currentRows = getValues('boardRows') || 3
+        const currentRows = getValues('boardRows') || boardRows
         const newValue = increment ? currentRows + 1 : currentRows - 1
         if (newValue >= 3 && newValue <= 10) {
             setValue('boardRows', newValue, { shouldValidate: true })
+            setBoardRows(newValue) // Update Zustand store
         }
     }
 
     const handleColsChange = (increment: boolean) => {
-        const currentCols = getValues('boardCols') || 3
+        const currentCols = getValues('boardCols') || boardCols
         const newValue = increment ? currentCols + 1 : currentCols - 1
         if (newValue >= 3 && newValue <= 10) {
             setValue('boardCols', newValue, { shouldValidate: true })
+            setBoardCols(newValue) // Update Zustand store
         }
     }
 
     const onSubmit = async (data: CustomizationFormData) => {
         try {
+            // Update Zustand store with validated data
+            updateSettings(data)
             onSave(data)
             onClose()
         } catch (error) {
@@ -67,7 +92,9 @@ const CustomizeModal = ({ isOpen, onClose, onSave, initialValues }: Props) => {
     }
 
     const handleClose = () => {
-        reset()
+        // Reset form to current store values
+        const currentSettings = getSettings()
+        reset(currentSettings)
         onClose()
     }
 

@@ -5,6 +5,7 @@ import PlayfulButton from "@/components/playful-button"
 import { FluentBot16Filled, IconParkSolidSettingTwo, MaterialSymbolsHistory, MingcutePlayFill } from "@/components/icons"
 import Board from "@/components/board"
 import CustomizeModal from "@/components/modals/customize-modal"
+import { useSettingStore } from "@/stores/setting"
 import { z } from "zod"
 import { customizationSchema } from "@/validation/setting"
 
@@ -37,18 +38,16 @@ const ActionButton = ({ onCustomizeClick }: { onCustomizeClick: () => void }) =>
 
 function PlayPage() {
     const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState(false)
-    const [gameSettings, setGameSettings] = useState<CustomizationFormData>({
-        boardRows: 3,
-        boardCols: 3,
-        aiDifficulty: 'medium'
-    })
+    
+    // Use Zustand store for settings
+    const { boardRows, boardCols, aiDifficulty, getSettings } = useSettingStore()
 
     const handleCustomizeClick = () => {
         setIsCustomizeModalOpen(true)
     }
 
     const handleCustomizeSave = (data: CustomizationFormData) => {
-        setGameSettings(data)
+        // Settings are already saved to Zustand store in the modal
         console.log('Game settings updated:', data)
     }
 
@@ -59,13 +58,13 @@ function PlayPage() {
     return (
         <>
             <div className="flex h-full w-full items-center justify-center gap-36 flex-wrap-reverse">
-                <Board size="xl" idle />
+                <Board size="xl" idle rows={boardRows} cols={boardCols} />
                 <div className="flex flex-col gap-4 items-center justify-center">
                     <div className="flex flex-col gap-2 items-center justify-center pb-6">
                         <h1 className="text-3xl font-bold text-center">Play Tic Tac Toe</h1>
                         <h1 className="text-3xl font-bold text-center">With Your Friends</h1>
                         <div className="text-sm mt-2">
-                            Board: {gameSettings.boardRows}×{gameSettings.boardCols} | AI: {gameSettings.aiDifficulty}
+                            Board: {boardRows}×{boardCols} | AI: {aiDifficulty}
                         </div>
                     </div>
                     <ActionButton onCustomizeClick={handleCustomizeClick} />
@@ -76,7 +75,7 @@ function PlayPage() {
                 isOpen={isCustomizeModalOpen}
                 onClose={handleCustomizeClose}
                 onSave={handleCustomizeSave}
-                initialValues={gameSettings}
+                initialValues={getSettings()}
             />
         </>
     )
