@@ -43,3 +43,11 @@ export function IcomoonFreeCross(props: SVGProps<SVGSVGElement>) {
 export function FaCircleO(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width={props.fontSize} height={props.fontSize} viewBox="0 0 1536 1536" {...props}><path fill="currentColor" d="M768 224q-148 0-273 73T297 495t-73 273t73 273t198 198t273 73t273-73t198-198t73-273t-73-273t-198-198t-273-73m768 544q0 209-103 385.5T1153.5 1433T768 1536t-385.5-103T103 1153.5T0 768t103-385.5T382.5 103T768 0t385.5 103T1433 382.5T1536 768"></path></svg>);
 }
+
+export function SolarLogout2Bold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1a1 1 0 1 1 2 0v1h8V4H8v1a1 1 0 1 1-2 0V4a2 2 0 0 1 2-2"></path><path fill="currentColor" d="M11 16a1 1 0 0 1-1-1v-2H3.414l1.293 1.293a1 1 0 0 1-1.414 1.414l-3-3a1 1 0 0 1 0-1.414l3-3a1 1 0 0 1 1.414 1.414L3.414 11H10v-2a1 1 0 0 1 2 0v6a1 1 0 0 1-1 1"></path></svg>);
+}
+
+export function SolarLogin2Bold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1a1 1 0 1 1 2 0v1h8V4H8v1a1 1 0 1 1-2 0V4a2 2 0 0 1 2-2"></path><path fill="currentColor" d="M13 16a1 1 0 0 0 1-1v-2h6.586l-1.293 1.293a1 1 0 0 0 1.414 1.414l3-3a1 1 0 0 0 0-1.414l-3-3a1 1 0 0 0-1.414 1.414L20.586 11H14V9a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1"></path></svg>);
+}

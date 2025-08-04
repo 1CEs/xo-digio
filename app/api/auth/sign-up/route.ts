@@ -6,6 +6,7 @@ import connectDB from "@/database/connect";
 import User from "@/database/schema/user.schema";
 import { ZodError } from "zod";
 import { ApiResponseHelper } from "@/lib/api-response";
+import { JWTHelper } from '@/lib/jwt';
 
 export async function POST(request: NextRequest) {
     try {
@@ -49,8 +50,15 @@ export async function POST(request: NextRequest) {
 
         const savedUser = await newUser.save();
 
+        // Generate JWT token for automatic login
+        const token = JWTHelper.generateToken({
+            userId: savedUser._id.toString(),
+            username: savedUser.username,
+            email: savedUser.email
+        });
+
         const userResponse = {
-            id: savedUser._id,
+            id: savedUser._id.toString(),
             username: savedUser.username,
             email: savedUser.email,
             avatar: savedUser.avatar,
@@ -58,7 +66,21 @@ export async function POST(request: NextRequest) {
             updatedAt: savedUser.updatedAt
         };
 
-        return ApiResponseHelper.created(userResponse, "User created successfully");
+        const response = ApiResponseHelper.created(userResponse, "User created successfully");
+        
+        // Set authentication cookie
+        const cookieOptions = [
+            `auth-token=${token}`,
+            'HttpOnly',
+            'Secure',
+            'SameSite=Strict',
+            'Path=/',
+            `Max-Age=${12 * 60 * 60}`
+        ].join('; ');
+
+        response.headers.set('Set-Cookie', cookieOptions);
+
+        return response;
 
     } catch (error) {
         console.error("Sign-up error:", error);

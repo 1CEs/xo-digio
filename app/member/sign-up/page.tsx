@@ -2,8 +2,6 @@
 
 import PlayfulButton from "@/components/playful-button"
 import PlayfulInput from "@/components/playful-input"
-import Image from "next/image"
-import Logo from "@/public/logo.svg"
 import { SolarPasswordBold, IcRoundEmail, SolarUserBold, SolarEyeBold, BiEyeSlashFill } from "@/components/icons"
 import { useState, useEffect } from "react"
 import Link from "next/link"
@@ -13,6 +11,8 @@ import { signUpSchema } from "@/validation/form"
 import type { z } from "zod"
 import { toast } from 'react-toastify'
 import Form from "@/components/member/form"
+import { useAuthStore } from "@/stores/auth"
+import { useRouter } from "nextjs-toploader/app"
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -40,44 +40,35 @@ function SignUpPage() {
     setPasswordValue(watchedPassword || '')
   }, [watchedPassword])
 
+  const { signUp, isLoading } = useAuthStore();
+  const router = useRouter();
+
   const onSubmit = async (data: FormValues) => {
     try {
-      const response = await fetch('/api/auth/sign-up', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+      const result = await signUp(data.username, data.email, data.password, data.confirmPassword);
       
-      const result = await response.json()
-      
-      if (response.ok) {
-        toast.success('Account created successfully! Welcome to XO-Digio!', {
+      if (result.success) {
+        toast.success('Account created successfully! Welcome to XO-Digio! Redirecting to game...', {
+          position: "top-right",
+          autoClose: 2000,
+        });
+        
+        // Navigate to play page after successful sign up
+        setTimeout(() => {
+          router.push('/play');
+        }, 1000);
+      } else {
+        toast.error(result.message, {
           position: "top-right",
           autoClose: 5000,
-        })
-        console.log('Form submitted successfully:', result)
-      } else {
-        // Handle API errors
-        if (result.error) {
-          toast.error(result.error, {
-            position: "top-right",
-            autoClose: 5000,
-          })
-        } else {
-          toast.error('Failed to create account. Please try again.', {
-            position: "top-right",
-            autoClose: 5000,
-          })
-        }
+        });
       }
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error('Error submitting form:', error);
       toast.error('Network error. Please check your connection and try again.', {
         position: "top-right",
         autoClose: 5000,
-      })
+      });
     }
   }
 
@@ -150,8 +141,8 @@ function SignUpPage() {
       </div>
 
       <div className="w-full flex items-center justify-between">
-        <PlayfulButton size="md" variant="primary" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'SIGNING UP...' : 'SIGN UP'}
+        <PlayfulButton size="md" variant="primary" type="submit" disabled={isSubmitting || isLoading}>
+          {(isSubmitting || isLoading) ? 'SIGNING UP...' : 'SIGN UP'}
         </PlayfulButton>
         <Link href="/member/sign-in" className="text-xs underline">Already have an account?</Link>
       </div>

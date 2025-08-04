@@ -1,11 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import PlayfulButton from "@/components/playful-button"
 import { FluentBot16Filled, IconParkSolidSettingTwo, MaterialSymbolsHistory, MingcutePlayFill } from "@/components/icons"
 import Board from "@/components/board"
 import CustomizeModal from "@/components/modals/customize-modal"
+import ProfileCard from "@/components/profile-card"
 import { useSettingStore } from "@/stores/setting"
+import { useAuthStore } from "@/stores/auth"
 import { z } from "zod"
 import { customizationSchema } from "@/validation/setting"
 
@@ -39,15 +41,14 @@ const ActionButton = ({ onCustomizeClick }: { onCustomizeClick: () => void }) =>
 function PlayPage() {
     const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState(false)
     
-    // Use Zustand store for settings
     const { boardRows, boardCols, aiDifficulty, getSettings } = useSettingStore()
+    const { role, isAuthenticated } = useAuthStore()
 
     const handleCustomizeClick = () => {
         setIsCustomizeModalOpen(true)
     }
 
     const handleCustomizeSave = (data: CustomizationFormData) => {
-        // Settings are already saved to Zustand store in the modal
         console.log('Game settings updated:', data)
     }
 
@@ -57,7 +58,7 @@ function PlayPage() {
 
     return (
         <>
-            <div className="flex h-full w-full items-center justify-center gap-36 flex-wrap-reverse">
+            <div className="flex h-full w-full items-center justify-center gap-8 flex-wrap">
                 <Board size="xl" idle rows={boardRows} cols={boardCols} />
                 <div className="flex flex-col gap-4 items-center justify-center">
                     <div className="flex flex-col gap-2 items-center justify-center pb-6">
@@ -68,6 +69,9 @@ function PlayPage() {
                         </div>
                     </div>
                     <ActionButton onCustomizeClick={handleCustomizeClick} />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <ProfileCard className="w-64" />
                 </div>
             </div>
             

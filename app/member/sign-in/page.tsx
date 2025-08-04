@@ -9,6 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import PlayfulButton from "@/components/playful-button";
 import type { z } from "zod"
 import Link from "next/link";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "nextjs-toploader/app";
+import { toast } from 'react-toastify';
 
 function SignInPage() {
     type FormValues = z.infer<typeof signInSchema>
@@ -25,11 +28,35 @@ function SignInPage() {
         }
     })
     
+    const { signIn, isLoading } = useAuthStore();
+    const router = useRouter();
+    
     const onSubmit = async (data: FormValues) => {
         try {
-            console.log('Sign in data:', data)
+            const result = await signIn(data.usernameOrEmail, data.password);
+            
+            if (result.success) {
+                toast.success('Welcome back! Redirecting to game...', {
+                    position: "top-right",
+                    autoClose: 2000,
+                });
+                
+                // Navigate to play page after successful sign in
+                setTimeout(() => {
+                    router.push('/play');
+                }, 1000);
+            } else {
+                toast.error(result.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                });
+            }
         } catch (error) {
-            console.error('Error signing in:', error)
+            console.error('Error signing in:', error);
+            toast.error('Network error. Please check your connection and try again.', {
+                position: "top-right",
+                autoClose: 5000,
+            });
         }
     }
     return (
@@ -52,8 +79,8 @@ function SignInPage() {
                 />
             </div>
             <div className="w-full flex items-center justify-between">
-                <PlayfulButton size="md" variant="primary" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'SIGNING IN...' : 'SIGN IN'}
+                <PlayfulButton size="md" variant="primary" type="submit" disabled={isSubmitting || isLoading}>
+                    {(isSubmitting || isLoading) ? 'SIGNING IN...' : 'SIGN IN'}
                 </PlayfulButton>
                 <Link href="/member/sign-up" className="text-xs underline">Don't have an account?</Link>
             </div>

@@ -6,9 +6,26 @@ import { useRouter } from "nextjs-toploader/app";
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import MockBoard from "@/components/mock-board";
+import { useAuth } from "@/hooks/use-auth";
+import { useEffect } from "react";
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
+  const { 
+    isAuthenticated, 
+    handleGuestPlay, 
+    handleSignInRedirect, 
+    handleSignUpRedirect, 
+    handlePlayRedirect 
+  } = useAuth();
+
+  // If user is already authenticated, redirect to play page
+  useEffect(() => {
+    if (isAuthenticated) {
+      handlePlayRedirect();
+    }
+  }, [isAuthenticated]);
+
   return (
       <main className="flex gap-x-16 items-center justify-center h-full w-full">
         <div>
@@ -18,16 +35,16 @@ export default function Home() {
           <div className="flex items-center pb-4 animate-pulse">
             <Image src={Logo} alt="Logo" width={200} height={200} />
           </div>
-          <PlayfulButton size="xl" variant="primary" onClick={() => router.push("/member/sign-up")}>
+          <PlayfulButton size="xl" variant="primary" onClick={handleSignUpRedirect}>
             SIGN UP
           </PlayfulButton>
-          <PlayfulButton size="lg" variant="secondary" onClick={() => router.push("/member/sign-in")}>
+          <PlayfulButton size="lg" variant="secondary" onClick={handleSignInRedirect}>
             SIGN IN
           </PlayfulButton>
           <Divider>
             <p className="text-center text-xs">continue as</p>
           </Divider>
-          <PlayfulButton size="lg" variant="disabled" onClick={() => router.push("/play")}>
+          <PlayfulButton size="lg" variant="warning" onClick={handleGuestPlay}>
             GUEST
           </PlayfulButton>
         </div>
