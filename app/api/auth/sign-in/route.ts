@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
             return ApiResponseHelper.error('Invalid credentials', 401);
         }
 
-        const token = JWTHelper.generateToken({
+        const token = await JWTHelper.generateToken({
             userId: user._id.toString(),
             username: user.username,
             email: user.email

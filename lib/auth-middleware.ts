@@ -15,13 +15,13 @@ export function getAuthToken(request: NextRequest): string | null {
   return null;
 }
 
-export function verifyAuthToken(request: NextRequest): JWTPayload | null {
+export async function verifyAuthToken(request: NextRequest): Promise<JWTPayload | null> {
   const token = getAuthToken(request);
   if (!token) {
     return null;
   }
 
-  return JWTHelper.verifyToken(token);
+  return await JWTHelper.verifyToken(token);
 }
 
 export interface AuthenticatedRequest extends NextRequest {
@@ -30,7 +30,7 @@ export interface AuthenticatedRequest extends NextRequest {
 
 export async function verifyToken(request: NextRequest): Promise<{ success: boolean; userId?: string; message?: string }> {
   try {
-    const payload = verifyAuthToken(request);
+    const payload = await verifyAuthToken(request);
     if (!payload) {
       return { success: false, message: 'Invalid or missing token' };
     }
@@ -42,7 +42,7 @@ export async function verifyToken(request: NextRequest): Promise<{ success: bool
 
 export function requireAuth(handler: (request: AuthenticatedRequest) => Promise<Response>) {
   return async (request: NextRequest): Promise<Response> => {
-    const user = verifyAuthToken(request);
+    const user = await verifyAuthToken(request);
     
     if (!user) {
       return new Response(

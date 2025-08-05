@@ -11,11 +11,8 @@ interface ProfileCardProps {
 }
 
 export default function ProfileCard({ className = "" }: ProfileCardProps) {
-  const { user, role, isAuthenticated, signOut } = useAuthStore();
+  const { user, role, isAuthenticated, isLoading, signOut } = useAuthStore();
   const router = useRouter();
-
-  console.log(isAuthenticated)
-  console.log(user)
 
   const handleSignOut = async () => {
     try {
@@ -36,6 +33,25 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
   const handleSignIn = () => {
     router.push('/member/sign-in');
   };
+
+  if (isLoading) {
+    return (
+      <div className={`bg-white/10 backdrop-blur-sm rounded-xl w-full p-4 border border-white/20 ${className}`}>
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-10 h-10 bg-white/10 rounded-full animate-pulse" />
+          <div className="flex-1">
+            <div className="h-4 bg-white/10 rounded animate-pulse mb-1" />
+            <div className="h-3 bg-white/10 rounded animate-pulse w-3/4" />
+          </div>
+          <div className="h-6 w-12 bg-white/10 rounded-full animate-pulse" />
+        </div>
+
+        <div className="flex flex-col gap-y-2 items-center justify-between">
+          <div className="h-8 bg-white/10 rounded-lg animate-pulse w-full" />
+        </div>
+      </div>
+    );
+  }
 
   if (isAuthenticated && user) {
     return (

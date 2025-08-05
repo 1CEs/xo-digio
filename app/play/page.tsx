@@ -22,56 +22,56 @@ type Player = 'X' | 'O'
 type CellValue = Player | null
 
 interface GameState {
-  board: CellValue[][]
-  currentPlayer: Player
-  status: GameStatus
-  winner: Player | null
-  mode: GameMode
-  winningLine: Array<{row: number, col: number}> | null
-  moves: IMove[]
-  gameStartTime: Date | null
+    board: CellValue[][]
+    currentPlayer: Player
+    status: GameStatus
+    winner: Player | null
+    mode: GameMode
+    winningLine: Array<{ row: number, col: number }> | null
+    moves: IMove[]
+    gameStartTime: Date | null
 }
 
-const MenuButtons = ({ onCustomizeClick, onStartGame, onHistoryClick, isAuthenticated }: { 
-  onCustomizeClick: () => void
-  onStartGame: (mode: 'vs-friend' | 'vs-bot') => void
-  onHistoryClick: () => void
-  isAuthenticated: boolean
+const MenuButtons = ({ onCustomizeClick, onStartGame, onHistoryClick, isAuthenticated }: {
+    onCustomizeClick: () => void
+    onStartGame: (mode: 'vs-friend' | 'vs-bot') => void
+    onHistoryClick: () => void
+    isAuthenticated: boolean
 }) => {
     return (
         <div className="flex flex-col gap-4 items-center justify-center">
-            <PlayfulButton 
-                className="w-full" 
-                startIcon={<MingcutePlayFill fontSize={32}/>} 
-                size="lg" 
+            <PlayfulButton
+                className="w-full"
+                startIcon={<MingcutePlayFill fontSize={32} />}
+                size="lg"
                 variant="primary"
                 onClick={() => onStartGame('vs-friend')}
             >
                 VS FRIEND
             </PlayfulButton>
-            <PlayfulButton 
-                className="w-fit" 
-                startIcon={<FluentBot16Filled fontSize={32}/> } 
-                size="lg" 
+            <PlayfulButton
+                className="w-fit"
+                startIcon={<FluentBot16Filled fontSize={32} />}
+                size="lg"
                 variant="secondary"
                 onClick={() => onStartGame('vs-bot')}
             >
                 VS BOT
             </PlayfulButton>
-            <PlayfulButton 
-                className="w-fit" 
-                startIcon={<MaterialSymbolsHistory fontSize={24}/> } 
-                size="md" 
+            <PlayfulButton
+                className="w-fit"
+                startIcon={<MaterialSymbolsHistory fontSize={24} />}
+                size="md"
                 variant={isAuthenticated ? "success" : "secondary"}
                 onClick={onHistoryClick}
                 disabled={!isAuthenticated}
             >
                 HISTORY {!isAuthenticated && "(Sign in required)"}
             </PlayfulButton>
-            <PlayfulButton 
-                className="w-full" 
-                startIcon={<IconParkSolidSettingTwo fontSize={24}/> } 
-                size="md" 
+            <PlayfulButton
+                className="w-full"
+                startIcon={<IconParkSolidSettingTwo fontSize={24} />}
+                size="md"
                 variant="warning"
                 onClick={onCustomizeClick}
             >
@@ -81,14 +81,14 @@ const MenuButtons = ({ onCustomizeClick, onStartGame, onHistoryClick, isAuthenti
     )
 }
 
-const GameControls = ({ 
-  gameState, 
-  onRestart, 
-  onBackToMenu 
-}: { 
-  gameState: GameState
-  onRestart: () => void
-  onBackToMenu: () => void 
+const GameControls = ({
+    gameState,
+    onRestart,
+    onBackToMenu
+}: {
+    gameState: GameState
+    onRestart: () => void
+    onBackToMenu: () => void
 }) => {
     const getStatusMessage = () => {
         if (gameState.status === 'finished') {
@@ -120,19 +120,19 @@ const GameControls = ({
                     {getStatusMessage()}
                 </div>
             </div>
-            
+
             <div className="flex gap-3">
-                <PlayfulButton 
-                    startIcon={<SolarRestart2Bold fontSize={20}/>} 
-                    size="md" 
+                <PlayfulButton
+                    startIcon={<SolarRestart2Bold fontSize={20} />}
+                    size="md"
                     variant="warning"
                     onClick={onRestart}
                 >
                     RESTART
                 </PlayfulButton>
-                <PlayfulButton 
-                    startIcon={<SolarHomeBold fontSize={20}/>} 
-                    size="md" 
+                <PlayfulButton
+                    startIcon={<SolarHomeBold fontSize={20} />}
+                    size="md"
                     variant="secondary"
                     onClick={onBackToMenu}
                 >
@@ -156,7 +156,7 @@ function PlayPage() {
         moves: [],
         gameStartTime: null
     })
-    
+
     const { boardRows, boardCols, aiDifficulty, getSettings } = useSettingStore()
     const { user, isAuthenticated } = useAuthStore()
     const { saveGame } = useHistoryStore()
@@ -165,7 +165,7 @@ function PlayPage() {
         return Array(boardRows).fill(null).map(() => Array(boardCols).fill(null))
     }
 
-    const checkWinner = (board: CellValue[][]): { winner: Player | null, winningLine: Array<{row: number, col: number}> | null } => {
+    const checkWinner = (board: CellValue[][]): { winner: Player | null, winningLine: Array<{ row: number, col: number }> | null } => {
         const rows = board.length
         const cols = board[0].length
         const winCondition = Math.min(rows, cols, 5)
@@ -176,37 +176,37 @@ function PlayPage() {
                 if (!player) continue
 
                 const directions = [
-                    [0, 1],   
-                    [1, 0],   
-                    [1, 1],   
-                    [1, -1]   
+                    [0, 1],
+                    [1, 0],
+                    [1, 1],
+                    [1, -1]
                 ]
 
                 for (const [dRow, dCol] of directions) {
-                    const winningCells: Array<{row: number, col: number}> = [{row, col}]
-                    
+                    const winningCells: Array<{ row: number, col: number }> = [{ row, col }]
+
                     for (let i = 1; i < winCondition; i++) {
                         const newRow = row + i * dRow
                         const newCol = col + i * dCol
-                        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && 
+                        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols &&
                             board[newRow][newCol] === player) {
-                            winningCells.push({row: newRow, col: newCol})
+                            winningCells.push({ row: newRow, col: newCol })
                         } else {
                             break
                         }
                     }
-                    
+
                     for (let i = 1; i < winCondition; i++) {
                         const newRow = row - i * dRow
                         const newCol = col - i * dCol
-                        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && 
+                        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols &&
                             board[newRow][newCol] === player) {
-                            winningCells.unshift({row: newRow, col: newCol})
+                            winningCells.unshift({ row: newRow, col: newCol })
                         } else {
                             break
                         }
                     }
-                    
+
                     if (winningCells.length >= winCondition) {
                         return { winner: player, winningLine: winningCells }
                     }
@@ -227,11 +227,11 @@ function PlayPage() {
 
         const newBoard = gameState.board.map(r => [...r])
         newBoard[row][col] = gameState.currentPlayer
-        
+
         const result = checkWinner(newBoard)
         const isFull = isBoardFull(newBoard)
         const nextPlayer = gameState.currentPlayer === 'X' ? 'O' : 'X'
-        
+
         const newMove: IMove = {
             playerId: gameState.currentPlayer === 'X' ? 'st' : 'nd',
             symbol: gameState.currentPlayer,
@@ -239,10 +239,10 @@ function PlayPage() {
             timestamp: new Date(),
             moveNumber: gameState.moves.length + 1
         }
-        
+
         const newMoves = [...gameState.moves, newMove]
         const newStatus = result.winner ? 'finished' : isFull ? 'draw' : 'playing'
-        
+
         setGameState(prev => ({
             ...prev,
             board: newBoard,
@@ -263,8 +263,8 @@ function PlayPage() {
     }
 
     const makeBotMove = (board: CellValue[][], currentMoves: IMove[]) => {
-        const emptyCells: Array<{row: number, col: number}> = []
-        
+        const emptyCells: Array<{ row: number, col: number }> = []
+
         for (let row = 0; row < boardRows; row++) {
             for (let col = 0; col < boardCols; col++) {
                 if (board[row][col] === null) {
@@ -272,18 +272,18 @@ function PlayPage() {
                 }
             }
         }
-        
+
         if (emptyCells.length === 0) return
-        
+
         const randomIndex = Math.floor(Math.random() * emptyCells.length)
         const { row, col } = emptyCells[randomIndex]
-        
+
         const newBoard = board.map(r => [...r])
         newBoard[row][col] = 'O'
-        
+
         const result = checkWinner(newBoard)
         const isFull = isBoardFull(newBoard)
-        
+
         const botMove: IMove = {
             playerId: 'bot',
             symbol: 'O',
@@ -291,10 +291,10 @@ function PlayPage() {
             timestamp: new Date(),
             moveNumber: currentMoves.length + 1
         }
-        
+
         const newMoves = [...currentMoves, botMove]
         const newStatus = result.winner ? 'finished' : isFull ? 'draw' : 'playing'
-        
+
         setGameState(prev => ({
             ...prev,
             board: newBoard,
@@ -304,7 +304,7 @@ function PlayPage() {
             winningLine: result.winningLine,
             moves: newMoves
         }))
-        
+
         if (newStatus !== 'playing') {
             saveGameToHistory(newMoves, newStatus, result.winner)
         }
@@ -377,13 +377,13 @@ function PlayPage() {
             console.log('Game not saved - user not authenticated')
             return
         }
-        
+
         const gameData = {
             gameStatus: status === 'draw' ? 'completed' as const : 'completed' as const,
-            winner: status === 'draw' ? 'draw' as const : 
-                   winner === 'X' ? 'st' as const : 
-                   winner === 'O' && gameState.mode === 'vs-bot' ? 'bot' as const :
-                   winner === 'O' ? 'nd' as const : null,
+            winner: status === 'draw' ? 'draw' as const :
+                winner === 'X' ? 'st' as const :
+                    winner === 'O' && gameState.mode === 'vs-bot' ? 'bot' as const :
+                        winner === 'O' ? 'nd' as const : null,
             gameSetting: {
                 duration: gameState.gameStartTime ? Math.floor((Date.now() - gameState.gameStartTime.getTime()) / 1000) : 0,
                 boardRows,
@@ -392,7 +392,7 @@ function PlayPage() {
             } as IGameSetting,
             moves
         }
-        
+
         try {
             await saveGame(gameData)
             console.log('Game saved successfully')
@@ -414,26 +414,27 @@ function PlayPage() {
                                 Board: {boardRows}×{boardCols} | AI: {aiDifficulty}
                             </div>
                         </div>
-                        <MenuButtons 
-                            onCustomizeClick={handleCustomizeClick} 
+                        <MenuButtons
+                            onCustomizeClick={handleCustomizeClick}
                             onStartGame={handleStartGame}
                             onHistoryClick={handleHistoryClick}
                             isAuthenticated={isAuthenticated}
                         />
+                        <div className="flex flex-col gap-4">
+                            <ProfileCard className="w-64" />
+                        </div>
                     </div>
-                    <div className="flex flex-col gap-4">
-                        <ProfileCard className="w-64" />
-                    </div>
+
                 </div>
-                
-                <CustomizeModal 
+
+                <CustomizeModal
                     isOpen={isCustomizeModalOpen}
                     onClose={handleCustomizeClose}
                     onSave={handleCustomizeSave}
                     initialValues={getSettings()}
                 />
-                
-                <HistoryModal 
+
+                <HistoryModal
                     isOpen={isHistoryModalOpen}
                     onClose={handleHistoryClose}
                 />
@@ -444,14 +445,14 @@ function PlayPage() {
         <>
             <div className="flex h-full w-full items-center justify-center gap-8 flex-wrap">
                 <div className="flex flex-col w-fit items-center justify-center gap-4">
-                    <GameControls 
+                    <GameControls
                         gameState={gameState}
                         onRestart={handleRestart}
                         onBackToMenu={handleBackToMenu}
                     />
-                    <Board 
-                        size="lg" 
-                        rows={boardRows} 
+                    <Board
+                        size="lg"
+                        rows={boardRows}
                         cols={boardCols}
                         board={gameState.board}
                         onCellClick={handleCellClick}
@@ -464,15 +465,15 @@ function PlayPage() {
                     </div>
                 </div>
             </div>
-            
-            <CustomizeModal 
+
+            <CustomizeModal
                 isOpen={isCustomizeModalOpen}
                 onClose={handleCustomizeClose}
                 onSave={handleCustomizeSave}
                 initialValues={getSettings()}
             />
-            
-            <HistoryModal 
+
+            <HistoryModal
                 isOpen={isHistoryModalOpen}
                 onClose={handleHistoryClose}
             />

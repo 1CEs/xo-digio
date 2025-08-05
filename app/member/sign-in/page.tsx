@@ -41,7 +41,6 @@ function SignInPage() {
                     autoClose: 2000,
                 });
                 
-                // Navigate to play page after successful sign in
                 setTimeout(() => {
                     router.push('/play');
                 }, 1000);

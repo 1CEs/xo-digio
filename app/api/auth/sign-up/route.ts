@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         const savedUser = await newUser.save();
 
         // Generate JWT token for automatic login
-        const token = JWTHelper.generateToken({
+        const token = await JWTHelper.generateToken({
             userId: savedUser._id.toString(),
             username: savedUser.username,
             email: savedUser.email

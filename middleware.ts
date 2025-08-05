@@ -2,18 +2,17 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { JWTHelper } from './lib/jwt';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const token = request.cookies.get('auth-token')?.value;
 
-  const protectedRoutes = ['/api/auth/me'];
+  const protectedRoutes = ['/api/auth/me', '/api/history'];
   
   const authRoutes = ['/member/sign-in', '/member/sign-up'];
 
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
   const isAuthRoute = authRoutes.some(route => pathname.startsWith(route));
-
   if (isProtectedRoute) {
     if (!token) {
       return NextResponse.json(
@@ -22,8 +21,8 @@ export function middleware(request: NextRequest) {
       );
     }
 
-    const payload = JWTHelper.verifyToken(token);
-    if (!payload) {
+    const decoded = await JWTHelper.verifyToken(token);
+    if (!decoded) {
       const response = NextResponse.json(
         { success: false, message: 'Invalid token' },
         { status: 401 }
@@ -34,7 +33,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (isAuthRoute && token) {
-    const payload = JWTHelper.verifyToken(token);
+    const payload = await JWTHelper.verifyToken(token);
     if (payload) {
       return NextResponse.redirect(new URL('/play', request.url));
     }
