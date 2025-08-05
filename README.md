@@ -21,9 +21,8 @@
 
 ## 📋 ความต้องการของระบบ
 
-- BunJS
-- npm, yarn, pnpm หรือ bun
-- MongoDB (Local หรือ MongoDB Atlas)
+- BunJS 1.2.17+
+- MongoDB
 
 ## ⚙️ การติดตั้งและเรียกใช้
 
@@ -35,11 +34,7 @@ cd xo-digio
 
 ### 2. ติดตั้ง Dependencies
 ```bash
-npm install
-# หรือ
-yarn install
-# หรือ
-pnpm install
+bun install
 ```
 
 ### 3. ตั้งค่า Environment Variables
@@ -47,27 +42,20 @@ pnpm install
 
 ```env
 MONGODB_URI="mongodb://localhost:27017/xo-digio"
-# หรือใช้ MongoDB Atlas
-# MONGODB_URI="mongodb+srv://username:password@cluster.mongodb.net/xo-digio"
-
 JWT_SECRET="your-super-secret-jwt-key-here"
 ```
 
 ### 4. เรียกใช้ Development Server
 ```bash
-npm run dev
-# หรือ
-yarn dev
-# หรือ
-pnpm dev
+bun run dev
 ```
 
 เปิดเบราว์เซอร์ไปที่ [http://localhost:3000](http://localhost:3000)
 
 ### 5. Build สำหรับ Production
-```bash
-npm run build
-npm run start
+```bash     
+bun run build
+bun run start
 ```
 
 ## 🏗️ สถาปัตยกรรมและการออกแบบ
@@ -77,11 +65,11 @@ npm run start
 xo-digio/
 ├── app/                    # Next.js App Router
 │   ├── api/               # API Routes
-│   │   ├── auth/          # Authentication endpoints
+│   │   ├── auth/          # Authentication endpoint
 │   │   └── history/       # Game history endpoints
 │   ├── member/            # Authentication pages
 │   ├── play/              # Game page
-│   └── page.tsx           # Home page
+│   └── /                  # Home page
 ├── components/            # React Components
 │   ├── modals/           # Modal components
 │   ├── board.tsx         # Game board
@@ -296,59 +284,3 @@ interface GameState {
 - เข้าไปที่หน้า History เพื่อดูเกมที่เล่นแล้ว
 - คลิก Replay เพื่อดูการเล่นย้อนหลัง
 - ใช้ปุ่มควบคุมเพื่อเล่น/หยุด/เร็ว/ช้า
-
-## 🔧 การพัฒนาเพิ่มเติม
-
-### เพิ่มฟีเจอร์ใหม่
-1. **Multiplayer Online**: เชื่อมต่อผู้เล่นหลายคนผ่าน WebSocket
-2. **Tournament Mode**: การแข่งขันแบบทัวร์นาเมนต์
-3. **Custom Themes**: ธีมสีและรูปแบบที่หลากหลาย
-4. **Statistics**: สถิติการเล่นแบบละเอียด
-5. **Achievements**: ระบบรางวัลและความสำเร็จ
-
-### การ Deploy
-
-#### Vercel (แนะนำ)
-```bash
-# ติดตั้ง Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# ตั้งค่า Environment Variables ใน Vercel Dashboard
-```
-
-#### Docker
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-## 🤝 การมีส่วนร่วม
-
-1. Fork repository
-2. สร้าง feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit การเปลี่ยนแปลง (`git commit -m 'Add some AmazingFeature'`)
-4. Push ไปยัง branch (`git push origin feature/AmazingFeature`)
-5. เปิด Pull Request
-
-## 📄 License
-
-โปรเจคนี้ใช้ MIT License - ดูรายละเอียดใน [LICENSE](LICENSE) file
-
-## 📞 ติดต่อ
-
-หากมีคำถามหรือข้อเสนอแนะ สามารถติดต่อได้ที่:
-- Email: your-email@example.com
-- GitHub Issues: [Create an issue](https://github.com/your-username/xo-digio/issues)
-
----
-
-**สนุกกับการเล่น XO Digio! 🎮✨**
