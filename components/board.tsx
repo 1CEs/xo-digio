@@ -15,6 +15,7 @@ type Props = {
     currentPlayer?: Player
     gameStatus?: GameStatus
     winningLine?: Array<{row: number, col: number}> | null
+    disabled?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
 const Board = ({ 
@@ -27,6 +28,7 @@ const Board = ({
     currentPlayer, 
     gameStatus,
     winningLine,
+    disabled=false,
     ...props 
 }: Props) => {
     const idlePattern = [
@@ -76,7 +78,7 @@ const Board = ({
     }
     
     const handleCellClick = (row: number, col: number) => {
-        if (onCellClick && !idle && gameStatus === 'playing') {
+        if (onCellClick && !idle && !disabled && gameStatus === 'playing') {
             onCellClick(row, col)
         }
     }
@@ -116,7 +118,7 @@ const Board = ({
                     const colorClass = colors[index % colors.length]
                     
                     const cellValue = board ? board[rowIndex][colIndex] : null
-                    const isClickable = !idle && onCellClick && !cellValue && gameStatus === 'playing'
+                    const isClickable = !idle && !disabled && onCellClick && !cellValue && gameStatus === 'playing'
                     const isWinning = isWinningCell(rowIndex, colIndex)
                     const winningCellStyle = isWinning ? getWinningCellColor(cellValue) : ''
                     

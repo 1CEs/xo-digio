@@ -3,7 +3,7 @@
 import { useAuthStore } from "@/stores/auth";
 import { SolarUserBold, SolarLogout2Bold, SolarLogin2Bold } from "@/components/icons";
 import PlayfulButton from "./playful-button";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { toast } from "react-toastify";
 
 interface ProfileCardProps {
@@ -43,8 +43,8 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
             {user.avatar ? (
-              <img 
-                src={user.avatar} 
+              <img
+                src={user.avatar}
                 alt={user.username}
                 className="w-full h-full rounded-full object-cover"
               />
@@ -56,20 +56,20 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
             <h3 className="font-semibold text-sm text-white">{user.username}</h3>
             <p className="text-xs text-white/70">{user.email}</p>
           </div>
-        </div>
-        
-        <div className="flex items-center justify-between">
           <div className="text-xs">
             <span className="inline-block bg-success/20 text-success px-2 py-1 rounded-full">
               User
             </span>
           </div>
+        </div>
+
+        <div className="flex flex-col gap-y-2 items-center justify-between">
           <PlayfulButton
             size="sm"
             variant="secondary"
             onClick={handleSignOut}
             startIcon={<SolarLogout2Bold />}
-            className="text-xs"
+            className="text-xs w-full"
           >
             Sign Out
           </PlayfulButton>
@@ -88,20 +88,21 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
           <h3 className="font-semibold text-sm text-white">Guest Player</h3>
           <p className="text-xs text-white/70">Playing as guest</p>
         </div>
-      </div>
-      
-      <div className="flex items-center justify-between">
         <div className="text-xs">
           <span className="inline-block bg-warning/20 text-warning px-2 py-1 rounded-full">
             Guest
           </span>
         </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-between">
+        
         <PlayfulButton
           size="sm"
           variant="primary"
           onClick={handleSignIn}
           startIcon={<SolarLogin2Bold />}
-          className="text-xs"
+          className="text-xs w-full"
         >
           Sign In
         </PlayfulButton>

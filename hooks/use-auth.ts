@@ -1,7 +1,7 @@
 "use client"
 
 import { useAuthStore } from "@/stores/auth";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useEffect } from "react";
 
 export function useAuth() {

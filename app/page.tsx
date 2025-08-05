@@ -2,7 +2,6 @@
 
 import Divider from "@/components/divider";
 import PlayfulButton from "@/components/playful-button";
-import { useRouter } from "nextjs-toploader/app";
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import MockBoard from "@/components/mock-board";
@@ -10,7 +9,6 @@ import { useAuth } from "@/hooks/use-auth";
 import { useEffect } from "react";
 
 export default function Home() {
-  const router = useRouter();
   const { 
     isAuthenticated, 
     handleGuestPlay, 

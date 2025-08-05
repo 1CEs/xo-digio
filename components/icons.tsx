@@ -49,13 +49,41 @@ export function SolarLogout2Bold(props: SVGProps<SVGSVGElement>) {
 }
 
 export function SolarLogin2Bold(props: SVGProps<SVGSVGElement>) {
-	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1a1 1 0 1 1 2 0v1h8V4H8v1a1 1 0 1 1-2 0V4a2 2 0 0 1 2-2"></path><path fill="currentColor" d="M13 16a1 1 0 0 0 1-1v-2h6.586l-1.293 1.293a1 1 0 0 0 1.414 1.414l3-3a1 1 0 0 0 0-1.414l-3-3a1 1 0 0 0-1.414 1.414L20.586 11H14V9a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1"></path></svg>);
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M16 2h-8a2 2 0 0 0-2 2v1a1 1 0 1 0 2 0V4h8v16H8v-1a1 1 0 1 0-2 0v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M13 16a1 1 0 0 0 1-1v-2h6.586l-1.293 1.293a1 1 0 0 0 1.414 1.414l3-3a1 1 0 0 0 0-1.414l-3-3a1 1 0 0 0-1.414 1.414L20.586 11H14v-2a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1"></path></svg>);
 }
 
 export function SolarRestart2Bold(props: SVGProps<SVGSVGElement>) {
-	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M18.364 8.05a.75.75 0 0 1 1.03.25c.912 1.453 1.356 3.137 1.356 4.95c0 5.937-4.813 10.75-10.75 10.75S-.75 19.187-.75 13.25S4.063 2.5 10 2.5c2.125 0 4.078.618 5.74 1.677V3a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75H13a.75.75 0 0 1 0-1.5h1.825A8.226 8.226 0 0 0 10 4C5.168 4 1.25 7.918 1.25 12.75S5.168 21.5 10 21.5s8.75-3.918 8.75-8.75c0-1.442-.35-2.804-.97-4.004a.75.75 0 0 1 .334-1.046Z"></path></svg>);
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M18.364 8.05a1 1 0 0 1 1.414 1.414c-.435.436-.695 1.04-.695 1.707a3.17 3.17 0 0 0 3.171 3.172c.667 0 1.27-.26 1.707-.696a1 1 0 0 1 1.414 1.415A5.17 5.17 0 0 1 21.254 16a5.17 5.17 0 0 1-5.171-5.171c0-1.378.54-2.63 1.42-3.55z"></path><path fill="currentColor" fillRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10a1 1 0 1 0-2 0a8 8 0 1 1-8-8a8 8 0 0 1 5.657 2.343L16.95 9.05a1 1 0 0 0 1.414 1.414l2.829-2.828a1 1 0 0 0 0-1.415L18.364 3.39a1 1 0 0 0-1.414 1.414l.707.708A9.96 9.96 0 0 0 12 2" clipRule="evenodd"></path></svg>);
 }
 
 export function SolarHomeBold(props: SVGProps<SVGSVGElement>) {
-	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M2.33537 7.87495c-.1581-.9484.04431-1.92319.57618-2.76093.53187-.83774 1.34005-1.46619 2.29823-1.78652L9.07729 2.028c1.31582-.4411 2.73158-.4411 4.04738 0l3.8685 1.30157c.9582.32033 1.7664.94878 2.2982 1.78652.5319.83774.7343 1.81253.5762 2.76093L19.5566 9.8212c-.3168 1.8974-.9533 3.7204-1.8856 5.3981l-4.2488 7.6417c-.5667 1.0193-1.8274 1.3687-2.8467.7893l-.7933-.4508c-.9398-.5342-1.5162-1.5557-1.5162-2.6867v-2.9616c0-.7682-.6318-1.4-1.4-1.4-.7682 0-1.4.6318-1.4 1.4v2.9616c0 1.131-.5764 2.1525-1.5162 2.6867l-.7933.4508c-1.0193.5794-2.28.2299-2.8467-.7893L2.8422 15.2193c-.9323-1.6777-1.5688-3.5007-1.8856-5.3981z"></path></svg>);
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" fillRule="evenodd" d="M2.52 7.823C2 8.77 2 9.915 2 12.203v1.522c0 3.9 0 5.851 1.172 7.063C4.343 22 6.229 22 10 22h4c3.771 0 5.657 0 6.828-1.212C22 19.576 22 17.626 22 13.725v-1.522c0-2.289 0-3.433-.52-4.381c-.518-.949-1.467-1.537-3.364-2.715l-2-1.241C14.111 2.622 13.108 2 12 2s-2.11.622-4.116 1.866l-2 1.24C3.987 6.286 3.038 6.874 2.52 7.823M9 17.25a.75.75 0 0 0 .75.75h4.5a.75.75 0 0 0 0-1.5h-4.5A.75.75 0 0 0 9 17.25" clipRule="evenodd"></path></svg>);
+}
+
+export function SolarPlayBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M21.409 9.353a2.998 2.998 0 0 1 0 5.294L8.597 21.614C6.534 22.737 4 21.277 4 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z"></path></svg>);
+}
+
+export function SolarPauseBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M2 6c0-1.886 0-2.828.586-3.414S4.114 2 6 2s2.828 0 3.414.586S10 4.114 10 6v12c0 1.886 0 2.828-.586 3.414S7.886 22 6 22s-2.828 0-3.414-.586S2 19.886 2 18zm12 0c0-1.886 0-2.828.586-3.414S16.114 2 18 2s2.828 0 3.414.586S22 4.114 22 6v12c0 1.886 0 2.828-.586 3.414S19.886 22 18 22s-2.828 0-3.414-.586S14 19.886 14 18z"></path></svg>);
+}
+
+export function SolarArrowLeftBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="m15 4l-8 8l8 8"></path></svg>);
+}
+
+export function SolarArrowRightBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="m9 4l8 8l-8 8"></path></svg>);
+}
+
+export function SolarSpeedometer2Bold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12a9.97 9.97 0 0 0 2.929 7.071l1.414-1.414A7.97 7.97 0 0 1 4 12a8 8 0 1 1 16 0a7.97 7.97 0 0 1-2.343 5.657l1.414 1.414A9.97 9.97 0 0 0 22 12c0-5.523-4.477-10-10-10"></path><path fill="currentColor" d="M12 6a1 1 0 0 1 1 1v4.382l2.447 2.447a1 1 0 0 1-1.414 1.414L11.293 12.5A1 1 0 0 1 11 12V7a1 1 0 0 1 1-1"></path></svg>);
+}
+
+export function SolarCalendarBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M6.94 2c.416 0 .753.336.753.75v1.542c.532-.013 1.117-.013 1.767-.013h4.08c.65 0 1.235 0 1.767.013V2.75c0-.414.337-.75.753-.75s.753.336.753.75v1.582a9.7 9.7 0 0 1 .663.053c1.258.164 2.284.674 3.118 1.508s1.344 1.86 1.508 3.118C22 9.393 22 10.88 22 13.25v.5c0 2.37 0 3.857-.342 5.239c-.164 1.258-.674 2.284-1.508 3.118s-1.86 1.344-3.118 1.508C15.65 24 14.162 24 11.792 24h-.584c-2.37 0-3.857 0-5.239-.385c-1.258-.164-2.284-.674-3.118-1.508s-1.344-1.86-1.508-3.118C1 17.607 1 16.12 1 13.75v-.5c0-2.37 0-3.857.343-5.239c.164-1.258.674-2.284 1.508-3.118s1.86-1.344 3.118-1.508c.22-.029.434-.046.663-.053V2.75c0-.414.337-.75.753-.75zM2.75 10c0-.414.336-.75.75-.75h16c.414 0 .75.336.75.75s-.336.75-.75.75h-16a.75.75 0 0 1-.75-.75"></path></svg>);
+}
+
+export function SolarTimeBold(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m0 5a1 1 0 0 1 1 1v3.586l2.707 2.707a1 1 0 0 1-1.414 1.414L11.586 13A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1"></path></svg>);
 }

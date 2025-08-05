@@ -28,6 +28,18 @@ export interface AuthenticatedRequest extends NextRequest {
   user: JWTPayload;
 }
 
+export async function verifyToken(request: NextRequest): Promise<{ success: boolean; userId?: string; message?: string }> {
+  try {
+    const payload = verifyAuthToken(request);
+    if (!payload) {
+      return { success: false, message: 'Invalid or missing token' };
+    }
+    return { success: true, userId: payload.userId };
+  } catch (error) {
+    return { success: false, message: 'Token verification failed' };
+  }
+}
+
 export function requireAuth(handler: (request: AuthenticatedRequest) => Promise<Response>) {
   return async (request: NextRequest): Promise<Response> => {
     const user = verifyAuthToken(request);
