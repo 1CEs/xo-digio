@@ -82,7 +82,7 @@ export default function ProfileCard({ className = "" }: ProfileCardProps) {
         <div className="flex flex-col gap-y-2 items-center justify-between">
           <PlayfulButton
             size="sm"
-            variant="secondary"
+            variant="danger"
             onClick={handleSignOut}
             startIcon={<SolarLogout2Bold />}
             className="text-xs w-full"

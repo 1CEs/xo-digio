@@ -13,6 +13,7 @@ import { useHistoryStore } from "@/stores/history"
 import { z } from "zod"
 import { customizationSchema } from "@/validation/setting"
 import { IMove, IGameSetting } from "@/database/schema/user.interface"
+import MoveTracker from "@/components/move-tracker"
 
 type CustomizationFormData = z.infer<typeof customizationSchema>
 
@@ -404,7 +405,7 @@ function PlayPage() {
     if (gameState.mode === 'menu') {
         return (
             <>
-                <div className="flex h-full w-full items-center justify-center gap-8 flex-wrap">
+                <div className="flex h-fit w-full items-center justify-center gap-8 flex-wrap">
                     <Board size="xl" idle rows={boardRows} cols={boardCols} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <div className="flex flex-col gap-2 items-center justify-center pb-6">
@@ -443,26 +444,38 @@ function PlayPage() {
     }
     return (
         <>
-            <div className="flex h-full w-full items-center justify-center gap-8 flex-wrap">
-                <div className="flex flex-col w-fit items-center justify-center gap-4">
+            <div className="flex h-fit w-full items-start justify-center gap-8 flex-wrap p-4">
+                {/* Game Board Section */}
+                <div className="flex flex-col items-center justify-center gap-4 flex-shrink-0">
                     <GameControls
                         gameState={gameState}
                         onRestart={handleRestart}
                         onBackToMenu={handleBackToMenu}
                     />
-                    <Board
-                        size="lg"
-                        rows={boardRows}
-                        cols={boardCols}
-                        board={gameState.board}
-                        onCellClick={handleCellClick}
-                        currentPlayer={gameState.currentPlayer}
-                        gameStatus={gameState.status}
-                        winningLine={gameState.winningLine}
-                    />
-                    <div className="w-full flex items-center justify-center pt-4">
-                        <ProfileCard />
+
+                    <div className="flex items-center justify-center">
+                        <Board
+                            size="lg"
+                            rows={boardRows}
+                            cols={boardCols}
+                            board={gameState.board}
+                            onCellClick={handleCellClick}
+                            currentPlayer={gameState.currentPlayer}
+                            gameStatus={gameState.status}
+                            winningLine={gameState.winningLine}
+                        />
                     </div>
+                </div>
+
+                {/* Profile and Move Tracker Section */}
+                <div className="flex flex-col items-start justify-center gap-4 flex-shrink-0 mt-16">
+                    <ProfileCard />
+                    <MoveTracker 
+                        moves={gameState.moves}
+                        currentPlayer={gameState.currentPlayer}
+                        gameMode={gameState.mode as 'vs-friend' | 'vs-bot'}
+                        className="w-64"
+                    />
                 </div>
             </div>
 
